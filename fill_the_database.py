@@ -55,15 +55,15 @@ def main():
 
             try:
                 product = key[count]
-                name = product['product_name']
-                brand = product['brands']
+                nom = product['product_name']
+                marque = product['brands']
                 magasin = product['stores']
                 pays = product['countries']
                 quantite = product['quantity']
                 nutriscore = product['nutriscore_grade']
                 url = product['url']
                 product_list = [
-                    name, brand, magasin, pays, quantite, nutriscore, url
+                    nom, marque, magasin, pays, quantite, nutriscore, url
                     ]
                 print(product_list)
 

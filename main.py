@@ -4,10 +4,6 @@
 import os
 import sys
 
-import mysql.connector
-import requests
-import json
-
 import fonctions
 
 
