@@ -94,10 +94,13 @@ def fill_the_database(food, nb_pages, table):
 
 ################################################################################
 
-# This fonction is quite simple, it's allow us to show all the tables we got for 
-# exemple here we just have two tables 'Corn_flakes' and 'Pizza'.
-
 def show_tables():
+
+    """
+    This fonction is quite simple, it's allow us to show all the tables we got for 
+    exemple here we just have two tables 'Corn_flakes' and 'Pizza'.
+
+    """
 
     cursor.execute("""SHOW TABLES""")
     result = cursor.fetchall()
@@ -109,9 +112,12 @@ def show_tables():
 
 ################################################################################
 
-# Now that we have the nutriscore we use it in this fonction which will 
-
 def healthier_one(nut_score, table):
+
+    """
+    This fonction pick in a table the foood the user choose to substitute
+
+    """
 
     print("Nous te proposons une liste de produits plus sains qui peuvent "
             "éventuellements substituer ton produit.\n")
@@ -162,5 +168,3 @@ def show_saved_food():
         value[2], value[3], value[4], value[5], value[6]))
 
     return
-
-################################################################################
