@@ -16,21 +16,24 @@ import classes
 def create_the_database():
 
     """
-    We creta the database thanks to the file 'creation_of_the_database.sql
+    We create the database thanks to the file 'creation_of_the_database.sql'
+
     """
+
+
 
     return
      
 ################################################################################
 
-def fill_the_database(food, nb_pages):
+def fill_the_database(food, nb_pages, table):
 
     """
-    We take from Openfoodfact Api the datas we need and put them in a list of- 
-    values. For that we create a for loop in fonction of the number of pages-
-    for an article we need like pizza and corn flakes and catch the number of-
-    pages in nb_page. It's allows us to not repet for exemple 20 times the-
-    same request.
+    We take from Openfoodfact Api the 'food' we want and put it in a list of- 
+    values. For that we create a for loop in fonction of the number of pages
+    'nb_page'. And we put all datas in the table we want 'table'. 
+    It's allows us to not repet for exemple 20 times the same request.
+
     """
 
     # First we connect to the database 'aliments'.
@@ -80,9 +83,9 @@ def fill_the_database(food, nb_pages):
 
             count += 1
 
-            # Now the idea is to put the product_list into our table
+            # Now the idea is to put the product_list into the table we choose
             cursor.execute(
-                """INSERT INTO Corn_flakes (nom, marque, magasin, pays, 
+                """INSERT INTO """+table+""" (nom, marque, magasin, pays, 
             quantite, nutriscore, url) VALUE(%s, %s, %s, %s, %s, %s, %s)""", 
             product_list
             )
