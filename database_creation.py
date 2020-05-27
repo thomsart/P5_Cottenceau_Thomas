@@ -8,8 +8,7 @@ import fonctions
 
 
 """
-The idea of this file is to create the database if it not exist and fill it 
-by the same time.
+This script create the database if it not exist and fill it by the same time.
 
 """
 ################################################################################
