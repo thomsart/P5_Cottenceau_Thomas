@@ -16,7 +16,7 @@ import classes
 def create_the_database():
 
     """
-    We create the database thanks to the file 'creation_of_the_database.sql'
+    We create the database thanks to the file 'database_creation.py'
 
     """
 
@@ -26,24 +26,25 @@ def create_the_database():
      
 ################################################################################
 
-def fill_the_database(food, nb_pages, table):
+def fill_tables(food, nb_pages, table):
 
     """
     We take from Openfoodfact Api the 'food' we want and put it in a list of- 
-    values. For that we create a for loop in fonction of the number of pages
-    'nb_page'. And we put all datas in the table we want 'table'. 
-    It's allows us to not repet for exemple 20 times the same request.
+    values in order to fill the table made for it in our database. 
+    For that we create a for loop in fonction of the number of pages 'nb_page' 
+    of the product on the Api, and we put all datas in the table we want with 
+    the argument 'table'.It's allows us to not repet for exemple 20 times the 
+    same request.
 
     """
 
-    # First we connect to the database 'aliments'.
+    # We connecte to our database
+    cursor = classes.Connection.connect()
 
     
     # Now we choose to take here for exemple 20 pages of 'cornflakes' from the Api.
-    nb_pages = 20
     for i in range(nb_pages):
 
-        food = 'cornflakes'
         # We decide to pick only the pizza and cornflakes for this exemple but-
         # we can choose any other food actually before checking in the Api-
         # 'Openfoodfact' of course. 
@@ -90,6 +91,9 @@ def fill_the_database(food, nb_pages, table):
             product_list
             )
 
+    # We disconnect to the database.
+    classes.Connection.disconnect()
+
     return
 
 ################################################################################
@@ -97,16 +101,22 @@ def fill_the_database(food, nb_pages, table):
 def show_tables():
 
     """
-    This fonction is quite simple, it's allow us to show all the tables we got for 
-    exemple here we just have two tables 'Corn_flakes' and 'Pizza'.
+    This fonction allow us to show all the tables we got for 
+    exemple here we just have three tables 'corn_flakes', 'pizza' and 'camenbert'.
 
     """
 
+    cursor = classes.Connection.connect()    
+
+    # We use the sql 'SHOW TABLES' procedure to show our tables.
     cursor.execute("""SHOW TABLES""")
     result = cursor.fetchall()
     choice1 = str(result[0]).strip("()',")
     choice2 = str(result[1]).strip("()',")
-    print("1  "+choice1+"\n2  "+choice2)
+    choice3 = str(result[2]).strip("()',")
+    print("1  "+choice1+"\n2  "+choice2+"\n3  "+choice3)
+
+    classes.Connection.disconnect()
 
     return
 
@@ -115,9 +125,12 @@ def show_tables():
 def healthier_one(nut_score, table):
 
     """
-    This fonction pick in a table the foood the user choose to substitute
+    This fonction pick in the 'table' the food the user choose to substitute and
+    shows some other food with better nutriscore than 'nut_score'.
 
     """
+
+    cursor = classes.Connection.connect()
 
     print("Nous te proposons une liste de produits plus sains qui peuvent "
             "éventuellements substituer ton produit.\n")
@@ -140,19 +153,22 @@ def healthier_one(nut_score, table):
     num = input("Si tu désire le remplacer par l'un des ces produit il te suffit" 
     " de rentrer son numéro sinon tape sur Entrer.\n")
 
+    classes.Connection.disconnect()
+
     return num
 
 ################################################################################
 
 def save_food(product_num, table):
 
-    product_num = str(product_num)
+    cursor = classes.Connection.connect()
     
-    cursor.execute("""SELECT * FROM """+table+""" WHERE id = """+product_num+""" """)
+    cursor.execute("""SELECT * FROM """+table+""" WHERE id = """+str(product_num)+""" """)
     result = cursor.fetchone()
-    result = str(result)
     cursor.execute("""INSERT INTO Save_food(foreign_key, nom, marque, magasin, 
-    pays, quantite, nutriscore, url, categorie) Values"""+result+""" """)
+    pays, quantite, nutriscore, url, categorie) Values"""+str(result)+""" """)
+
+    classes.Connection.disconnect()
 
     return
 
@@ -160,11 +176,15 @@ def save_food(product_num, table):
 
 def show_saved_food():
 
+    cursor = classes.Connection.connect()
+
     cursor.execute("""SELECT categorie, nutriscore, marque, nom, magasin, url, 
     foreign_key FROM Save_food ORDER BY categorie""")
     rows = cursor.fetchall()
     for value in rows:
         print("\n[{0}, {1}, {2}, {3}, {4}, {5}, {6}]".format(value[0], value[1], 
         value[2], value[3], value[4], value[5], value[6]))
+
+    classes.Connection.disconnect()
 
     return

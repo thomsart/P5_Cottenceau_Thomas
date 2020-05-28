@@ -8,7 +8,7 @@ import fonctions
 
 
 """
-This script create the database if it not exist and fill it by the same time.
+This script create the database if it not exist and fill the tables by the same time.
 
 """
 ################################################################################
@@ -17,9 +17,11 @@ def main():
 
     fonctions.create_the_database()
 
-    fonctions.fill_the_database('cornflakes', 20, 'Corn_flakes')
+    fonctions.fill_tables('cornflakes', 20, 'corn_flakes')
 
-    fonctions.fill_the_database('pizza', 20, 'Pizza')
+    fonctions.fill_tables('pizza', 20, 'pizza')
+
+    fonctions.fill_tables('camenbert', 20, 'camenbert')
 
     return 
 

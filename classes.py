@@ -12,12 +12,12 @@ import mysql.connector
 class Connection(mysql.connector):
 
     # We create the class Connection to connect and disconnect to the data base
-    # 
+    
     def __init__(self):
         self.host = "localhost"
-        self.user = "student"
+        self.user = "root"
         self.pw = "Metalspirit77+"
-        self.name = "aliments"
+        self.name = "aliment"
 
     def connect():
         # This fonction allows us to connect to the database
@@ -39,7 +39,7 @@ class Connection(mysql.connector):
 
 ################################################################################
 
-class Product:
+class Product(mysql.connector):
 
     def __init__(self, table):
         self.id = 0
@@ -67,7 +67,7 @@ class Product:
         name = input("\nQuel est son nom ?\n")
         name = name.replace("'", "\\'", 10)
 
-        cursor = connect()
+        cursor = Connection.connect()
         cursor.execute("""SELECT marque, nom, nutriscore, magasin, pays, url FROM 
         """+table+""" WHERE marque = '"""+brand+"""' AND nom = '"""+name+"""' """)
         test = cursor.fetchmany()
@@ -84,7 +84,7 @@ class Product:
                 value[1], value[2], value[3], value[4] ,value[5]))
                 nut = "'"+value[2]+"'"
 
-        connect.close()
+        Connection.disconnect()
 
         return nut
 

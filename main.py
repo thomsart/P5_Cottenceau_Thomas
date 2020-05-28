@@ -5,6 +5,7 @@ import os
 import sys
 
 import fonctions
+import classes
 
 
 ################################################################################
@@ -41,40 +42,57 @@ def main():
 
             if choice2 == 1:
                 
-                table = "Corn_flakes"
-                nut_score = fonctions.product_to_substitute(table)
+                nut_score = classes.Product.product_to_substitute("corn_flakes")
 
                 for letter in nut_score:
 
                     if letter in "abcd":
-                        product_num = fonctions.healthier_one(nut_score, table)
+                        product_num = fonctions.healthier_one(nut_score, "corn_flakes")
 
                         try:
                             product_num = int(product_num)
                         except:
                             continue
 
-                        fonctions.save_food(product_num, table)
+                        fonctions.save_food(product_num, "corn_flakes")
 
                     else :
                         continue
 
             elif choice2 == 2:
 
-                table = "Pizza"
-                nut_score = fonctions.product_to_substitute(table)
+                nut_score = classes.Product.product_to_substitute("pizza")
                 
                 for letter in nut_score:
 
                     if letter in "abcd":
-                        product_num = fonctions.healthier_one(nut_score, table)
+                        product_num = fonctions.healthier_one(nut_score, "pizza")
 
                         try:
                             product_num = int(product_num)
                         except:
                             continue
 
-                        fonctions.save_food(product_num, table)
+                        fonctions.save_food(product_num, "pizza")
+
+                    else :
+                        continue
+
+            elif choice2 == 3:
+
+                nut_score = classes.Product.product_to_substitute("camenbert")
+                
+                for letter in nut_score:
+
+                    if letter in "abcd":
+                        product_num = fonctions.healthier_one(nut_score, "camenbert")
+
+                        try:
+                            product_num = int(product_num)
+                        except:
+                            continue
+
+                        fonctions.save_food(product_num, "camenbert")
 
                     else :
                         continue
