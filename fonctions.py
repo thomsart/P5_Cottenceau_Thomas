@@ -50,16 +50,20 @@ def create_the_database():
     cursor = connect.cursor()
     
     with open('script_database_aliment.sql', 'r') as sql :
+        block = ""
         for line in sql:
             if line[0] == "\n":
                 continue
             elif line[0] == "-":
                 continue
             else:
+                if ";" in line:
+                    block = block+line
+                    cursor.execute(block)
+                    block = ""
                 
-                
-                print(bloc)
-                # cursor.execute(line)
+                else:
+                    block = block+line
 
     # We disconnect to the database
     connect.commit()
