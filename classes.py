@@ -4,42 +4,12 @@
 import os
 import sys
 
-import mysql.connector
+import fonctions
 
 
 ################################################################################
 
-class Connection(mysql.connector):
-
-    # We create the class Connection to connect and disconnect to the data base
-    
-    def __init__(self):
-        self.host = "localhost"
-        self.user = "root"
-        self.pw = "Metalspirit77+"
-        self.name = "aliment"
-
-    def connect():
-        # This fonction allows us to connect to the database
-        connect = mysql.connector.connect(
-            host=host,user=user, password=pw, 
-            database=name
-            )
-        cur = connect.cursor()
-
-        return cur
-
-    def disconnect():
-        # This fonction allows us to disconnect to the database and save before.
-        connect.commit()
-        connect.close()
-    
-        return print("Au revoir !")
-
-
-################################################################################
-
-class Product(mysql.connector):
+class Product():
 
     def __init__(self, table):
         self.id = 0
@@ -52,7 +22,6 @@ class Product(mysql.connector):
         self.url = ""
         self.category = ""
         self.foreign_key = 0
-
 
     def product_to_substitute(table):
 
@@ -67,7 +36,7 @@ class Product(mysql.connector):
         name = input("\nQuel est son nom ?\n")
         name = name.replace("'", "\\'", 10)
 
-        cursor = Connection.connect()
+        cursor = fonctions.connect()
         cursor.execute("""SELECT marque, nom, nutriscore, magasin, pays, url FROM 
         """+table+""" WHERE marque = '"""+brand+"""' AND nom = '"""+name+"""' """)
         test = cursor.fetchmany()
@@ -84,7 +53,7 @@ class Product(mysql.connector):
                 value[1], value[2], value[3], value[4] ,value[5]))
                 nut = "'"+value[2]+"'"
 
-        Connection.disconnect()
+        fonctions.disconnect()
 
         return nut
 

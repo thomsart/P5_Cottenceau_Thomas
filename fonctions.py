@@ -4,23 +4,66 @@
 import os
 import sys
 
-import mysql.connector
+import mysql.connector as mc
 import requests
 import json
 
 import classes
 
+################################################################################ 
+
+def connect():
+
+    # This fonction allows us to connect to the database
+    connect = mc.connect(
+        host='localhost',user='root', password='Metalspirit77+', 
+        database=''
+        )
+    curs = connect.cursor()
+
+    return curs
+
+################################################################################
+
+def disconnect():
+
+    # This fonction allows us to disconnect to the database and save before.
+    connect.commit()
+    connect.close()
+
+    return print("Au revoir !")
 
 ################################################################################
 
 def create_the_database():
 
     """
-    We create the database thanks to the file 'database_creation.py'
+    We create the database in this fonction thanks to the file 'database_creation.py'
 
     """
+    # We connecte to our database
+    # This fonction allows us to connect to the database
+    connect = mc.connect(
+        host='localhost',user='root', password='Metalspirit77+', 
+        database=''
+        )
+    cursor = connect.cursor()
+    
+    with open('script_database_aliment.sql', 'r') as sql :
+        for line in sql:
+            if line[0] == "\n":
+                continue
+            elif line[0] == "-":
+                continue
+            else:
+                
+                
+                print(bloc)
+                # cursor.execute(line)
 
-
+    # We disconnect to the database
+    connect.commit()
+    connect.close()
 
     return
      
@@ -39,9 +82,7 @@ def fill_tables(food, nb_pages, table):
     """
 
     # We connecte to our database
-    cursor = classes.Connection.connect()
-
-    
+    cursor = connect()
     # Now we choose to take here for exemple 20 pages of 'cornflakes' from the Api.
     for i in range(nb_pages):
 
@@ -90,9 +131,7 @@ def fill_tables(food, nb_pages, table):
             quantite, nutriscore, url) VALUE(%s, %s, %s, %s, %s, %s, %s)""", 
             product_list
             )
-
-    # We disconnect to the database.
-    classes.Connection.disconnect()
+    disconnect()
 
     return
 
@@ -106,8 +145,7 @@ def show_tables():
 
     """
 
-    cursor = classes.Connection.connect()    
-
+    cursor = connect()    
     # We use the sql 'SHOW TABLES' procedure to show our tables.
     cursor.execute("""SHOW TABLES""")
     result = cursor.fetchall()
@@ -115,8 +153,7 @@ def show_tables():
     choice2 = str(result[1]).strip("()',")
     choice3 = str(result[2]).strip("()',")
     print("1  "+choice1+"\n2  "+choice2+"\n3  "+choice3)
-
-    classes.Connection.disconnect()
+    disconnect()
 
     return
 
@@ -130,8 +167,7 @@ def healthier_one(nut_score, table):
 
     """
 
-    cursor = classes.Connection.connect()
-
+    cursor = connect()
     print("Nous te proposons une liste de produits plus sains qui peuvent "
             "éventuellements substituer ton produit.\n")
     nutriscore_level = ['a', 'b', 'c', 'd']
@@ -152,8 +188,7 @@ def healthier_one(nut_score, table):
 
     num = input("Si tu désire le remplacer par l'un des ces produit il te suffit" 
     " de rentrer son numéro sinon tape sur Entrer.\n")
-
-    classes.Connection.disconnect()
+    disconnect()
 
     return num
 
@@ -161,14 +196,12 @@ def healthier_one(nut_score, table):
 
 def save_food(product_num, table):
 
-    cursor = classes.Connection.connect()
-    
+    cursor = connect()
     cursor.execute("""SELECT * FROM """+table+""" WHERE id = """+str(product_num)+""" """)
     result = cursor.fetchone()
     cursor.execute("""INSERT INTO Save_food(foreign_key, nom, marque, magasin, 
     pays, quantite, nutriscore, url, categorie) Values"""+str(result)+""" """)
-
-    classes.Connection.disconnect()
+    disconnect()
 
     return
 
@@ -176,15 +209,13 @@ def save_food(product_num, table):
 
 def show_saved_food():
 
-    cursor = classes.Connection.connect()
-
+    cursor = connect()
     cursor.execute("""SELECT categorie, nutriscore, marque, nom, magasin, url, 
     foreign_key FROM Save_food ORDER BY categorie""")
     rows = cursor.fetchall()
     for value in rows:
         print("\n[{0}, {1}, {2}, {3}, {4}, {5}, {6}]".format(value[0], value[1], 
         value[2], value[3], value[4], value[5], value[6]))
-
-    classes.Connection.disconnect()
+    disconnect()
 
     return
