@@ -16,8 +16,8 @@ def connect():
 
     # This fonction allows us to connect to the database
     connect = mc.connect(
-        host='localhost',user='root', password='Metalspirit77+', 
-        database=''
+        host='localhost',user='root', password='##############', 
+        database='aliment'
         )
     curs = connect.cursor()
 
