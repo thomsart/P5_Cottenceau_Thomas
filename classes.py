@@ -32,19 +32,18 @@ class Database():
 
 class Product():
 
-    def __init__(self, table):
+    def __init__(self):
         self.id = 0
         self.name = ""
         self.brand = ""
-        self.shop = ""
-        self.countrie = ""
+        self.store = ""
+        self.country = ""
         self.quantity = ""
         self.nutriscore = ""
         self.url = ""
         self.category = ""
-        self.foreign_key = 0
 
-    def product_to_substitute(table):
+    def product_to_substitute():
 
         # In this fonction we ask the user to tell the program which food he wants to 
         # substitute. Once the product is found in the database the fonction show it to
@@ -58,8 +57,8 @@ class Product():
         name = name.replace("'", "\\'", 10)
 
         cursor = fonctions.connect()
-        cursor.execute("""SELECT marque, nom, nutriscore, magasin, pays, url FROM 
-        """+table+""" WHERE marque = '"""+brand+"""' AND nom = '"""+name+"""' """)
+        cursor.execute("""SELECT brand, name, nutriscore, store, country, url, category FROM 
+        product WHERE brand = '"""+brand+"""' AND name = '"""+name+"""' """)
         test = cursor.fetchmany()
 
         if not test:

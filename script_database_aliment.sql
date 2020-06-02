@@ -19,58 +19,18 @@ USE `aliment` ;
 
 
 -- -----------------------------------------------------
--- Table `aliment`.`corn_flakes`
+-- Table `aliment`.`product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aliment`.`corn_flakes` (
+CREATE TABLE IF NOT EXISTS `aliment`.`product` (
   `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` TEXT NULL DEFAULT NULL,
-  `marque` VARCHAR(50) NULL DEFAULT NULL,
-  `magasin` TEXT NULL DEFAULT NULL,
-  `pays` TEXT NULL DEFAULT NULL,
-  `quantite` TEXT NULL DEFAULT NULL,
+  `name` TEXT NULL DEFAULT NULL,
+  `brand` VARCHAR(50) NULL DEFAULT NULL,
+  `store` TEXT NULL DEFAULT NULL,
+  `country` TEXT NULL DEFAULT NULL,
+  `quantity` TEXT NULL DEFAULT NULL,
   `nutriscore` VARCHAR(1) NULL DEFAULT NULL,
   `url` TEXT NULL DEFAULT NULL,
-  `categorie` VARCHAR(12) NULL DEFAULT 'corn_flakes',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `aliment`.`pizza`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aliment`.`pizza` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` TEXT NULL DEFAULT NULL,
-  `marque` VARCHAR(50) NULL DEFAULT NULL,
-  `magasin` TEXT NULL DEFAULT NULL,
-  `pays` TEXT NULL DEFAULT NULL,
-  `quantite` TEXT NULL DEFAULT NULL,
-  `nutriscore` VARCHAR(1) NULL DEFAULT NULL,
-  `url` TEXT NULL DEFAULT NULL,
-  `categorie` VARCHAR(20) NOT NULL DEFAULT 'pizza',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `aliment`.`camenbert`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aliment`.`camembert` (
-  `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nom` TEXT NULL DEFAULT NULL,
-  `marque` VARCHAR(50) NULL DEFAULT NULL,
-  `magasin` TEXT NULL DEFAULT NULL,
-  `pays` TEXT NULL DEFAULT NULL,
-  `quantite` TEXT NULL DEFAULT NULL,
-  `nutriscore` VARCHAR(1) NULL DEFAULT NULL,
-  `url` TEXT NULL DEFAULT NULL,
-  `categorie` VARCHAR(12) NULL DEFAULT 'camenbert',
+  `category` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1

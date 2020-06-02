@@ -31,7 +31,7 @@ def main():
         if choice == 1:
 
             print("\nSelectionne la catégorie qui t'intérèsse ?\n")
-            fonctions.show_tables()
+            fonctions.show_categorys()
             choice2 = input("\n")
 
             try:

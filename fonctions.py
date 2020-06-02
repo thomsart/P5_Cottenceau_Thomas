@@ -46,7 +46,7 @@ def create_the_database():
      
 ################################################################################
 
-def fill_tables(food, nb_pages, table):
+def fill_tables(food, nb_pages):
 
     """
     We take from Openfoodfact Api the 'food' we want and put it in a list of- 
@@ -80,15 +80,16 @@ def fill_tables(food, nb_pages, table):
 
             try:
                 product = key[count]
-                nom = product['product_name']
-                marque = product['brands']
-                magasin = product['stores']
-                pays = product['countries']
-                quantite = product['quantity']
+                name = product['product_name']
+                brand = product['brands']
+                store = product['stores']
+                country = product['countries']
+                quantity = product['quantity']
                 nutriscore = product['nutriscore_grade']
                 url = product['url']
+                category = str(food)
                 product_list = [
-                    nom, marque, magasin, pays, quantite, nutriscore, url
+                    name, brand, store, country, quantity, nutriscore, url, category
                     ]
                 print(product_list)
 
@@ -102,10 +103,12 @@ def fill_tables(food, nb_pages, table):
 
             # Now the idea is to put the product_list into the table we choose
             database.cursor.execute(
-                """INSERT INTO """+table+""" (nom, marque, magasin, pays, 
-            quantite, nutriscore, url) VALUE(%s, %s, %s, %s, %s, %s, %s)""", 
-            product_list
+                """INSERT INTO product (name, brand, store, country, quantity, 
+                nutriscore, url, category) VALUE(%s, %s, %s, %s, %s, %s, %s, %s)
+                """, product_list
             )
+            
+            # mettre les produits dans les tables product_category et category    
 
     database.disconnect()
 
@@ -113,23 +116,23 @@ def fill_tables(food, nb_pages, table):
 
 ################################################################################
 
-def show_tables():
+def show_categorys():
 
-    """
-    This fonction allow us to show all the tables we got for 
-    exemple here we just have three tables 'corn_flakes', 'pizza' and 'camenbert'.
 
-    """
 
-    cursor = connect()    
-    # We use the sql 'SHOW TABLES' procedure to show our tables.
-    cursor.execute("""SHOW TABLES""")
-    result = cursor.fetchall()
-    choice1 = str(result[0]).strip("()',")
-    choice2 = str(result[1]).strip("()',")
-    choice3 = str(result[2]).strip("()',")
-    print("1  "+choice1+"\n2  "+choice2+"\n3  "+choice3)
-    disconnect()
+    return
+
+################################################################################
+
+def product_to_substitute():
+
+
+
+
+
+
+
+
 
     return
 
@@ -170,10 +173,10 @@ def healthier_one(nut_score, table):
 
 ################################################################################
 
-def save_food(product_num, table):
+def save_food(product_num):
 
     cursor = connect()
-    cursor.execute("""SELECT * FROM """+table+""" WHERE id = """+str(product_num)+""" """)
+    cursor.execute("""SELECT * FROM product WHERE id = """+str(product_num)+""" """)
     result = cursor.fetchone()
     cursor.execute("""INSERT INTO Save_food(foreign_key, nom, marque, magasin, 
     pays, quantite, nutriscore, url, categorie) Values"""+str(result)+""" """)
