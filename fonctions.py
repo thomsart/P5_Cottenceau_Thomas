@@ -12,27 +12,6 @@ import classes
 
 ################################################################################ 
 
-def connect():
-
-    # This fonction allows us to connect to the database
-    connect = mc.connect(
-        host='localhost',user='root', password='##############', 
-        database='aliment'
-        )
-    curs = connect.cursor()
-
-    return curs
-
-################################################################################
-
-def disconnect():
-
-    # This fonction allows us to disconnect to the database and save before.
-    connect.commit()
-    connect.close()
-
-    return print("Au revoir !")
-
 ################################################################################
 
 def create_the_database():
@@ -42,12 +21,7 @@ def create_the_database():
 
     """
     # We connecte to our database
-    # This fonction allows us to connect to the database
-    connect = mc.connect(
-        host='localhost',user='root', password='Metalspirit77+', 
-        database=''
-        )
-    cursor = connect.cursor()
+    database = classes.Database("")
     
     with open('script_database_aliment.sql', 'r') as sql :
         block = ""
@@ -59,15 +33,14 @@ def create_the_database():
             else:
                 if ";" in line:
                     block = block+line
-                    cursor.execute(block)
+                    database.cursor.execute(block)
                     block = ""
                 
                 else:
                     block = block+line
 
     # We disconnect to the database
-    connect.commit()
-    connect.close()
+    database.disconnect()
 
     return
      
@@ -84,8 +57,7 @@ def fill_tables(food, nb_pages, table):
     same request.
 
     """
-
-    # We connecte to our database
+    # And for that we connecte to our database
     cursor = connect()
     # Now we choose to take here for exemple 20 pages of 'cornflakes' from the Api.
     for i in range(nb_pages):
@@ -135,6 +107,7 @@ def fill_tables(food, nb_pages, table):
             quantite, nutriscore, url) VALUE(%s, %s, %s, %s, %s, %s, %s)""", 
             product_list
             )
+
     disconnect()
 
     return

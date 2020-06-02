@@ -95,7 +95,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `aliment`.`camenbert`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `aliment`.`camenbert` (
+CREATE TABLE IF NOT EXISTS `aliment`.`camembert` (
   `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nom` TEXT NULL DEFAULT NULL,
   `marque` VARCHAR(50) NULL DEFAULT NULL,
@@ -117,8 +117,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
-CREATE USER '';
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

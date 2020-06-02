@@ -4,8 +4,29 @@
 import os
 import sys
 
-import fonctions
+import mysql.connector as mc
 
+
+################################################################################
+
+class Database():
+
+    def __init__(self, database):
+        self.host = "localhost"
+        self.user = "root"
+        self.pwd = "Metalspirit77+"
+        self.database = ""
+        self.connect = mc.connect(
+        host=self.host,user=self.user, password=self.pwd, database=self.database
+        )
+        self.cursor = self.connect.cursor()
+        
+    def insert_into():
+        pass
+
+    def disconnect(self):
+        self.connect.commit()
+        self.connect.close()
 
 ################################################################################
 

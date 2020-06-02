@@ -21,7 +21,7 @@ def main():
 
     # fonctions.fill_tables('pizza', 20, 'pizza')
 
-    # fonctions.fill_tables('camenbert', 20, 'camenbert')
+    # fonctions.fill_tables('camembert', 20, 'camenbert')
 
     return 
 
