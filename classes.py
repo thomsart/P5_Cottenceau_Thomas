@@ -11,11 +11,11 @@ import mysql.connector as mc
 
 class Database():
 
-    def __init__(self, database):
+    def __init__(self, name):
         self.host = "localhost"
         self.user = "root"
         self.pwd = "Metalspirit77+"
-        self.database = ""
+        self.database = name
         self.connect = mc.connect(
         host=self.host,user=self.user, password=self.pwd, database=self.database
         )

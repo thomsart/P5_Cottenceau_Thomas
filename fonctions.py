@@ -57,8 +57,7 @@ def fill_tables(food, nb_pages, table):
     same request.
 
     """
-    # And for that we connecte to our database
-    cursor = connect()
+    database = classes.Database("aliment")
     # Now we choose to take here for exemple 20 pages of 'cornflakes' from the Api.
     for i in range(nb_pages):
 
@@ -102,13 +101,13 @@ def fill_tables(food, nb_pages, table):
             count += 1
 
             # Now the idea is to put the product_list into the table we choose
-            cursor.execute(
+            database.cursor.execute(
                 """INSERT INTO """+table+""" (nom, marque, magasin, pays, 
             quantite, nutriscore, url) VALUE(%s, %s, %s, %s, %s, %s, %s)""", 
             product_list
             )
 
-    disconnect()
+    database.disconnect()
 
     return
 
