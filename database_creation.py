@@ -5,7 +5,7 @@ import os
 import sys
 
 import fonctions
-
+import classes
 
 """
 This script create the database if it not exist and fill the tables by the same time.
@@ -15,13 +15,18 @@ This script create the database if it not exist and fill the tables by the same 
 
 def main():
 
-    fonctions.create_the_database()
+    produit = classes.Product("Camembert 22 %", "Campagnette")
+    id_product = produit.select_product("product")
+    produit.show_product(id_product, "product")
 
-    fonctions.fill_tables('cornflakes', 3)
+    print(produit.category)
+    # fonctions.create_the_database()
 
-    fonctions.fill_tables('pizza', 3)
+    # fonctions.fill_tables('cornflakes', 3)
 
-    fonctions.fill_tables('camembert', 3)
+    # fonctions.fill_tables('pizza', 3)
+
+    # fonctions.fill_tables('camembert', 3)
 
     return 
 

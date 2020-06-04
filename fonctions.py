@@ -118,69 +118,12 @@ def fill_tables(food, nb_pages):
 
 def show_categorys():
 
+    database = classes.Database("aliment")
+    database.cursor.execute(
 
 
-    return
-
-################################################################################
-
-def product_to_substitute():
-
-
-
-
-
-
-
-
-
-    return
-
-################################################################################
-
-def healthier_one(nut_score, table):
-
-    """
-    This fonction pick in the 'table' the food the user choose to substitute and
-    shows some other food with better nutriscore than 'nut_score'.
-
-    """
-
-    cursor = connect()
-    print("Nous te proposons une liste de produits plus sains qui peuvent "
-            "éventuellements substituer ton produit.\n")
-    nutriscore_level = ['a', 'b', 'c', 'd']
-
-    for el in nutriscore_level:
-
-        if el == nut_score[1]:
-            break
-
-        else:
-            cursor.execute("""SELECT id, marque, nom, nutriscore, magasin, url 
-            FROM """+table+""" WHERE nutriscore = '"""+el+"""' """)
-            test = cursor.fetchmany()
-            
-            for value in test:
-                print("[{0}, {1}, {2}, {3}, {4}, {5}]\n".format(value[0], 
-                value[1], value[2], value[3], value[4] ,value[5]))
-
-    num = input("Si tu désire le remplacer par l'un des ces produit il te suffit" 
-    " de rentrer son numéro sinon tape sur Entrer.\n")
-    disconnect()
-
-    return num
-
-################################################################################
-
-def save_food(product_num):
-
-    cursor = connect()
-    cursor.execute("""SELECT * FROM product WHERE id = """+str(product_num)+""" """)
-    result = cursor.fetchone()
-    cursor.execute("""INSERT INTO Save_food(foreign_key, nom, marque, magasin, 
-    pays, quantite, nutriscore, url, categorie) Values"""+str(result)+""" """)
-    disconnect()
+    )
+    database.disconnect()    
 
     return
 
@@ -188,13 +131,13 @@ def save_food(product_num):
 
 def show_saved_food():
 
-    cursor = connect()
-    cursor.execute("""SELECT categorie, nutriscore, marque, nom, magasin, url, 
-    foreign_key FROM Save_food ORDER BY categorie""")
-    rows = cursor.fetchall()
+    database = classes.Database("aliment")
+    database.cursor.execute("""SELECT category, nutriscore, brand, name, store, 
+    url, FROM Save_food ORDER BY category""")
+    rows = database.cursor.fetchall()
     for value in rows:
         print("\n[{0}, {1}, {2}, {3}, {4}, {5}, {6}]".format(value[0], value[1], 
         value[2], value[3], value[4], value[5], value[6]))
-    disconnect()
+    database.disconnect()
 
     return
