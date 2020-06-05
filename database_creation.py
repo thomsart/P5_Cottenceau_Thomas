@@ -15,11 +15,13 @@ This script create the database if it not exist and fill the tables by the same 
 
 def main():
 
-    produit = classes.Product("Camembert 22 %", "Campagnette")
-    id_product = produit.select_product("product")
-    produit.show_product(id_product, "product")
+    produit = classes.Product("frosties", "kellogg\\'s")
+    produit.product_to_substitute("product")
+    produit.substitute_it("product")
+    
+    
 
-    print(produit.category)
+    
     # fonctions.create_the_database()
 
     # fonctions.fill_tables('cornflakes', 3)

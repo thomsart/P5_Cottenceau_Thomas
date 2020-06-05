@@ -107,8 +107,6 @@ def fill_tables(food, nb_pages):
                 nutriscore, url, category) VALUE(%s, %s, %s, %s, %s, %s, %s, %s)
                 """, product_list
             )
-            
-            # mettre les produits dans les tables product_category et category    
 
     database.disconnect()
 
