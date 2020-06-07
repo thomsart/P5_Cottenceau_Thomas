@@ -108,6 +108,12 @@ def fill_tables(food, nb_pages):
                 """, product_list
             )
 
+    database.cursor.execute(
+        """INSERT INTO category IF NOT EXIST (name) VALUE('"""+str(food)+"""')
+        """
+    )
+    
+    
     database.disconnect()
 
     return

@@ -15,20 +15,17 @@ This script create the database if it not exist and fill the tables by the same 
 
 def main():
 
-    produit = classes.Product("frosties", "kellogg\\'s")
-    produit.product_to_substitute("product")
-    produit.substitute_it("product")
+    # produit = classes.Product("frosties", "kellogg\\'s")
+    # produit.product_to_substitute("product")
+    # produit.substitute_it("product")
     
-    
+    fonctions.create_the_database()
 
-    
-    # fonctions.create_the_database()
+    fonctions.fill_tables('cornflakes', 3)
 
-    # fonctions.fill_tables('cornflakes', 3)
+    fonctions.fill_tables('pizza', 3)
 
-    # fonctions.fill_tables('pizza', 3)
-
-    # fonctions.fill_tables('camembert', 3)
+    fonctions.fill_tables('camembert', 3)
 
     return 
 
