@@ -11,13 +11,13 @@ import mysql.connector as mc
 
 class Database():
 
-    def __init__(self, name):
+    def __init__(self, db, user, pwd):
         self.host = "localhost"
-        self.user = "root"
-        self.pwd = "Metalspirit77+"
-        self.database = name
+        self.user = user
+        self.password = pwd
+        self.database = db
         self.connect = mc.connect(
-        host=self.host,user=self.user, password=self.pwd, database=self.database
+        host=self.host,user=self.user, password=self.password, database=self.database
         )
         self.cursor = self.connect.cursor()
 
@@ -30,7 +30,7 @@ class Database():
 class Product(Database):
 
     def __init__(self, nom, marque):
-        Database.__init__(self, "aliment")
+        Database.__init__(self, "aliment", "client", "thecode")
 
         self.id = ""
         self.name = nom
@@ -44,7 +44,7 @@ class Product(Database):
 
     def product_to_substitute(self, table):
 
-        database = Database("aliment")
+        database = Database("aliment", "client", "thecode")
         database.cursor.execute(
             """select id, name, brand, store, country, quantity, nutriscore, url, 
             category from """+table+""" WHERE name = '"""+self.name+"""' 
@@ -72,7 +72,7 @@ class Product(Database):
             if el == self.nutriscore:
                 break
             else:
-                database = Database("aliment")
+                database = Database("aliment", "client", "thecode")
                 database.cursor.execute(
                     """select * from """+table+""" WHERE nutriscore = '"""+el+"""' 
                     and category = '"""+self.category+"""' """
@@ -110,7 +110,7 @@ class Product(Database):
 
     def save_it(self):
 
-        database = Database("aliment")
+        database = Database("aliment", "client", "thecode")
         database.cursor.execute(
             """INSERT INTO save_food VALUES("""+self.id+""", """+self.name+"""
             """+self.brand+""", """+self.store+""", """+self.country+""", 

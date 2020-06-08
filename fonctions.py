@@ -10,7 +10,6 @@ import json
 
 import classes
 
-################################################################################ 
 
 ################################################################################
 
@@ -21,7 +20,7 @@ def create_the_database():
 
     """
     # We connecte to our database
-    database = classes.Database("")
+    database = classes.Database("", "root", "yourcode")
     
     with open('script_database_aliment.sql', 'r') as sql :
         block = ""
@@ -57,7 +56,7 @@ def fill_tables(food, nb_pages):
     same request.
 
     """
-    database = classes.Database("aliment")
+    database = classes.Database("aliment", "client", "thecode")
     # Now we choose to take here for exemple 20 pages of 'cornflakes' from the Api.
     for i in range(nb_pages):
 
@@ -113,7 +112,7 @@ def fill_tables(food, nb_pages):
         """
     )
     
-    
+
     database.disconnect()
 
     return
