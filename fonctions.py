@@ -20,7 +20,7 @@ def create_the_database():
 
     """
     # We connecte to our database
-    database = classes.Database("", "root", "yourcode")
+    database = classes.Database("", "root", "Metalspirit77+")
     
     with open('script_database_aliment.sql', 'r') as sql :
         block = ""
@@ -56,7 +56,18 @@ def fill_tables(food, nb_pages):
     same request.
 
     """
-    database = classes.Database("aliment", "client", "thecode")
+    database = classes.Database("aliment", "root", "Metalspirit77+")
+
+    database.cursor.execute(
+        """INSERT INTO category (name) VALUE('"""+str(food)+"""')
+        """
+    )
+    database.cursor.execute(
+        """SELECT id FROM category WHERE name = '"""+str(food)+"""'
+        """
+    )
+    id_cat = database.cursor.fetchone()[0]
+
     # Now we choose to take here for exemple 20 pages of 'cornflakes' from the Api.
     for i in range(nb_pages):
 
@@ -108,14 +119,23 @@ def fill_tables(food, nb_pages):
             )
 
     database.cursor.execute(
-        """INSERT INTO category IF NOT EXIST (name) VALUE('"""+str(food)+"""')
+        """SELECT id FROM product WHERE category = '"""+str(food)+"""'
         """
     )
-    
+    the_ids = database.cursor.fetchall()
+
+    for el in the_ids:
+
+        database.cursor.execute(
+            """INSERT INTO product_category (id_product, id_category) VALUES('"""+str(el[0])+"""', '"""+str(id_cat)+"""')
+            """
+        )
 
     database.disconnect()
 
     return
+
+
 
 ################################################################################
 

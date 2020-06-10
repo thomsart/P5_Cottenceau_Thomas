@@ -25,6 +25,8 @@ class Database():
         self.connect.commit()
         self.connect.close()
 
+    
+
 ################################################################################
 
 class Product(Database):
@@ -124,3 +126,6 @@ class Product(Database):
     #     brand = brand.replace("'", "\\'", 10)
     #     name = input("\nQuel est son nom ?\n")
     #     name = name.replace("'", "\\'", 10)
+
+# CREATE USER 'client'@'localhost' IDENTIFIED BY 'thecode';
+# GRANT ALL PRIVILEGES ON aliment.* TO 'client'@'localhost';

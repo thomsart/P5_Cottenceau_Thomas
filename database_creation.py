@@ -21,11 +21,13 @@ def main():
     
     fonctions.create_the_database()
 
-    fonctions.fill_tables('cornflakes', 3)
+    fonctions.fill_tables('cornflakes', 20)
 
-    fonctions.fill_tables('pizza', 3)
+    fonctions.fill_tables('pizza', 20)
 
-    fonctions.fill_tables('camembert', 3)
+    fonctions.fill_tables('camembert', 20)
+
+    fonctions.fill_tables('cornichon', 20)
 
     return 
 
