@@ -4,11 +4,12 @@
 import os
 import sys
 
-import fonctions
-import classes
+import classe_Database as cd
+import classe_Product as cp
 
 """
-This script create the database if it not exist and fill the tables by the same time.
+This script create the database if it's not exist and fill all the tables 
+by the same time.
 
 """
 ################################################################################
@@ -19,15 +20,15 @@ def main():
     # produit.product_to_substitute("product")
     # produit.substitute_it("product")
     
-    fonctions.create_the_database()
+    # fonctions.create_the_database()
 
-    fonctions.fill_tables('cornflakes', 20)
+    # fonctions.fill_tables('cornflakes', 20)
 
-    fonctions.fill_tables('pizza', 20)
+    # fonctions.fill_tables('pizza', 20)
 
-    fonctions.fill_tables('camembert', 20)
+    # fonctions.fill_tables('camembert', 20)
 
-    fonctions.fill_tables('cornichon', 20)
+    # fonctions.fill_tables('cornichon', 20)
 
     return 
 

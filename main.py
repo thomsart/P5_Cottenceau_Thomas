@@ -4,15 +4,15 @@
 import os
 import sys
 
-import fonctions
-import classes
+import classe_Database as cd
+import classe_Product as cp
 
 
 ################################################################################
 
 def main():
 
-    print("\nBonjour !")
+    print("\nBonjour, que souhaites tu faire ?")
 
     on = True
 
@@ -31,6 +31,8 @@ def main():
         if choice == 1:
 
             print("\nSelectionne la catégorie qui t'intérèsse ?\n")
+            database = classes.Database("aliment", "client", "thecode")
+            datbase.disconnect()
             fonctions.show_categorys()
             choice2 = input("\n")
 
