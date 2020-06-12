@@ -12,14 +12,17 @@ import classe_Product as cp
 
 def main():
 
-    print("\nBonjour, que souhaites tu faire ?")
+    print(
+        "\nBonjour, que souhaites tu faire ?"
+    )
 
     on = True
 
     while on:
         
-        print('\n1 Remplacer un aliment\n2 Retrouver ' 
-        'tes aliments sauvegardés\n3 Quitter\n')
+        print("\n1 Remplacer un aliment\n2 Retrouver " 
+        "tes aliments sauvegardés\n3 Quitter\n")
+
         choice = input()
 
         try:
@@ -30,79 +33,30 @@ def main():
 
         if choice == 1:
 
-            print("\nSelectionne la catégorie qui t'intérèsse ?\n")
-            database = classes.Database("aliment", "client", "thecode")
-            datbase.disconnect()
-            fonctions.show_categorys()
-            choice2 = input("\n")
+            print("\nVoici les catégories de produits présents dans le programme"
+            " pour le moment.\n")
 
-            try:
-                    choice2 = int(choice2)
-            except:
-                print("\nCe choix n'est pas au menu !")
-                continue
+            database = cd.Database("aliment", "client", "thecode")
+            database.show_category()
+            database.disconnect()
 
-            if choice2 == 1:
-                
-                nut_score = classes.Product.product_to_substitute("corn_flakes")
+            brand = input("\nQuelle est la marque du produit à substituer ?\n")
+            brand = brand.replace("'", "\\'", 10)
+            name = input("\nQuel est son nom ?\n")
+            name = name.replace("'", "\\'", 10)
 
-                for letter in nut_score:
-
-                    if letter in "abcd":
-                        product_num = fonctions.healthier_one(nut_score, "corn_flakes")
-
-                        try:
-                            product_num = int(product_num)
-                        except:
-                            continue
-
-                        fonctions.save_food(product_num, "corn_flakes")
-
-                    else :
-                        continue
-
-            elif choice2 == 2:
-
-                nut_score = classes.Product.product_to_substitute("pizza")
-                
-                for letter in nut_score:
-
-                    if letter in "abcd":
-                        product_num = fonctions.healthier_one(nut_score, "pizza")
-
-                        try:
-                            product_num = int(product_num)
-                        except:
-                            continue
-
-                        fonctions.save_food(product_num, "pizza")
-
-                    else :
-                        continue
-
-            elif choice2 == 3:
-
-                nut_score = classes.Product.product_to_substitute("camenbert")
-                
-                for letter in nut_score:
-
-                    if letter in "abcd":
-                        product_num = fonctions.healthier_one(nut_score, "camenbert")
-
-                        try:
-                            product_num = int(product_num)
-                        except:
-                            continue
-
-                        fonctions.save_food(product_num, "camenbert")
-
-                    else :
-                        continue
+            product = cp.Product(name, brand)
+            product.product_to_substitute("product")
+            product.substitute_it("product")
+            # product.save_it()
+            # product.disconnect()
 
         elif choice == 2:
             
             print("\nVoici tes aliments de substitution rangés par catégorie.")
-            fonctions.show_saved_food()
+            database = cd.Database("aliment", "client", "thecode")
+            database.show_saved_food()
+            database.disconnect()
 
         elif choice == 3:
 

@@ -15,20 +15,24 @@ by the same time.
 ################################################################################
 
 def main():
-
-    # produit = classes.Product("frosties", "kellogg\\'s")
-    # produit.product_to_substitute("product")
-    # produit.substitute_it("product")
     
-    # fonctions.create_the_database()
+    database = cd.Database('', 'root', 'Metalspirit77+')
 
-    # fonctions.fill_tables('cornflakes', 20)
+    database.create_the_database()
 
-    # fonctions.fill_tables('pizza', 20)
+    database.disconnect()
 
-    # fonctions.fill_tables('camembert', 20)
+    database = cd.Database('aliment', 'client', 'thecode')
 
-    # fonctions.fill_tables('cornichon', 20)
+    database.fill_tables('cornflakes', 20)
+
+    database.fill_tables('pizza', 20)
+
+    database.fill_tables('camembert', 20)
+
+    database.fill_tables('cornichon', 20)
+
+    database.disconnect()
 
     return 
 
