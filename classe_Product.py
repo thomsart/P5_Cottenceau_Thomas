@@ -68,26 +68,28 @@ class Product(cd.Database):
                     """select * from """+table+""" WHERE nutriscore = '"""+el+"""' 
                     and category = '"""+self.category+"""' """
                     )
-                row = (self.cursor.fetchone())
-                print(row)
-        
-        # urls = []
-        # for products in row:
-        #     for features in products:
-        #         url = products[7]
-        #         urls.append(url)
-        # unique_urls = []
-        # for url in urls:
-        #     if url not in unique_urls:
-        #         unique_urls.append(url)
-        
-        # for url in unique_urls:
+                row = (self.cursor.fetchall())
+                list_of_all_urls = []
+                for product in row:
+                    list_of_all_urls.append(product[7])
 
-        #     self.cursor.execute(
-        #             """select * from """+table+""" WHERE url = '"""+url+"""' """
-        #             )
-        #     row = (self.cursor.fetchall())
-        #     print(row)
+        
+        take_unique_urls = []
+        for urls in list_of_all_urls:
+            if urls not in take_unique_urls:
+                take_unique_urls.append(urls)
+
+
+        for url in take_unique_urls:
+
+            Url = "'"+url+"'"
+            self.cursor.execute(
+                """select * from """+table+""" WHERE url = """+Url+""" """
+                )
+            print(self.cursor.fetchone())
+
+
+
 
         the_one_user_pick = input("""\nSi tu désire en choisir un pour substituer """
         """ton produit tape son numéro (le premier dans les caractèristiques) et """

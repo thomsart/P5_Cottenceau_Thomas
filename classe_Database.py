@@ -119,7 +119,7 @@ class Database():
 
                 # Now the idea is to put the product_list into the table we choose
                 self.cursor.execute(
-                    """INSERT INTO product (name, brand, store, country, quantity, 
+                    """INSERT INTO product(name, brand, store, country, quantity, 
                     nutriscore, url, category) VALUE(%s, %s, %s, %s, %s, %s, %s, %s)
                     """, product_list
                 )
