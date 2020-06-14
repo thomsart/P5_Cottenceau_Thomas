@@ -48,8 +48,8 @@ def main():
             product = cp.Product(name, brand)
             product.product_to_substitute("product")
             product.substitute_it("product")
-            # product.save_it()
-            # product.disconnect()
+            product.save_it()
+            product.disconnect()
 
         elif choice == 2:
             

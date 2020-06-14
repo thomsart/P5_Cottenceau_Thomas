@@ -158,15 +158,15 @@ class Database():
 
         return
 
-    def show_saved_food():
+    def show_saved_food(self):
 
         """
         This methode show all the substitutes saved by the client.
         
         """
         self.cursor.execute(
-            """SELECT category, nutriscore, brand, name, store, 
-            url, FROM Save_food ORDER BY category"""
+            """SELECT category, nutriscore, name, brand, store, quantity, url
+            FROM save_food"""
         )
         rows = self.cursor.fetchall()
         for value in rows:
