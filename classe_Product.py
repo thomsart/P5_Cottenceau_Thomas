@@ -36,7 +36,6 @@ class Product(cd.Database):
             )
         row = (self.cursor.fetchall())
         values = row[0]
-        print(values)
 
         self.id = values[0]
         self.name = values[1]
@@ -53,7 +52,7 @@ class Product(cd.Database):
 
     def substitute_it(self, table):
         
-        print("\nEt Voici celui ou ceux qui peuvent le substituer.\n")
+        print("\nEt Voici une liste de ceux qui peuvent le substituer.\n")
         nutriscore_level = ['a', 'b', 'c', 'd']
         for el in nutriscore_level:
             if el == self.nutriscore:
@@ -69,31 +68,18 @@ class Product(cd.Database):
                     and category = '"""+self.category+"""' """
                     )
                 row = (self.cursor.fetchall())
-                list_of_all_urls = []
+                list_p = []
                 for product in row:
-                    list_of_all_urls.append(product[7])
-
-        
-        take_unique_urls = []
-        for urls in list_of_all_urls:
-            if urls not in take_unique_urls:
-                take_unique_urls.append(urls)
-
-
-        for url in take_unique_urls:
-
-            Url = "'"+url+"'"
-            self.cursor.execute(
-                """select * from """+table+""" WHERE url = """+Url+""" """
-                )
-            print(self.cursor.fetchone())
-
-
-
+                    if product[7] not in list_p :
+                        list_p.append(product[7])
+                        print("Numero: "+str(product[0])+" de nutriscore: "
+                        +str(product[6])+"\n",product[1],product[2],product[3]
+                        ,product[4],product[7])
+                    else:
+                        continue
 
         the_one_user_pick = input("""\nSi tu désire en choisir un pour substituer """
-        """ton produit tape son numéro (le premier dans les caractèristiques) et """
-        """appuie sur 'Entrer'.\n""")
+        """ton produit tape son numéro et appuie sur 'Entrer'.\n""")
         self.cursor.execute(
             """select id, name, brand, store, country, quantity, nutriscore, url, 
             category from """+table+""" WHERE id = '"""+the_one_user_pick+"""' """
