@@ -10,29 +10,37 @@ import classe_Product as cp
 
 ################################################################################
 
+"""
+This script is the executable of the proramme once you create the database with 
+the 'database_creation.py'.
+
+"""
+
+################################################################################
+
 def main():
 
-    print(
-        "\nBonjour, que souhaites tu faire ?"
-    )
+    print("\nBonjour, que souhaites tu faire ?")
 
     on = True
 
     while on:
         
-        print("\n1 Remplacer un aliment\n2 Retrouver " 
-        "tes aliments sauvegardés\n3 Quitter\n")
-
-        choice = input()
+        # We ask the user to do something by pressing the number of the action he
+        # wants to do.
+        choice = input("\n1 Remplacer un aliment\n2 Retrouver " 
+        "tes aliments sauvegardés\n3 Quitter\n\n")
 
         try:
-            choice = int(choice)
-        except:
-            print("\nCe choix n'est pas au menu !")
+            choice = int(choice) # We chieck if it's a number.
+        except Exception:
+            print("\nCe n'est pas un chiffre que tu rentres.")
 
 
         if choice == 1:
-
+            
+            # The programme show him all the differents food which composed the 
+            # database.
             print("\nVoici les catégories de produits présents dans le programme"
             " pour le moment.\n")
 
@@ -40,6 +48,8 @@ def main():
             database.show_category()
             database.disconnect()
 
+            # We Ask the user to enter the Brand and the name of the product he 
+            # want to substitute.
             brand = input("\nQuelle est la marque du produit à substituer ?\n")
             brand = brand.replace("'", "\\'", 10)
             name = input("\nQuel est son nom ?\n")
@@ -62,6 +72,10 @@ def main():
 
             on = False
             print("\nAu revoir !\n")
+        
+        else:
+            print("Ce choix n'est pas au menu.")
+
 
     return
 

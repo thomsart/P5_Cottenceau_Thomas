@@ -11,6 +11,12 @@ import classe_Database as cd
 
 ################################################################################
 
+"""
+We create the c class product 
+
+"""
+################################################################################
+
 class Product(cd.Database):
 
     def __init__(self, nom, marque):
@@ -34,9 +40,12 @@ class Product(cd.Database):
             category from """+table+""" WHERE name = '"""+self.name+"""' 
             and brand = '"""+self.brand+"""' """
             )
-        row = (self.cursor.fetchall())
+        row = self.cursor.fetchall()
+        print(row)
+        
         values = row[0]
-
+        #print(values)
+        
         self.id = values[0]
         self.name = values[1]
         self.brand = values[2]
@@ -47,7 +56,9 @@ class Product(cd.Database):
         self.url = values[7]
         self.category = values[8]
 
-        return print("\nVoici le produit que tu cherches à substituer !\n{}\n".format(values))
+        print("\nVoici le produit que tu cherches à substituer !\n{}\n".format(values))
+
+        return 
 
 
     def substitute_it(self, table):
@@ -79,13 +90,14 @@ class Product(cd.Database):
                         ,product[4],product[7])
                     else:
                         continue
+        print(list_product)
         print(list_id)
         the_one_user_pick = input("""\nSi tu désire en choisir un pour substituer """
         """ton produit tape son numéro et appuie sur 'Entrer'.\n""")
 
         if the_one_user_pick not in list_id:
             print ("Ce numero ne réfère pas à un produit proposé !")
-
+        
         else:
             self.cursor.execute(
                 """select id, name, brand, store, country, quantity, nutriscore, url, 

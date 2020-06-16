@@ -11,6 +11,12 @@ import json
 
 ################################################################################
 
+"""
+We create this class   
+
+"""
+################################################################################
+
 class Database():
 
     def __init__(self, db, user, pwd):
@@ -170,8 +176,8 @@ class Database():
         )
         rows = self.cursor.fetchall()
         for value in rows:
-            print(
-                "\n[{0}, {1}, {2}, {3}, {4}, {5}, {6}]".format(value[0], value[1], 
+            print("\n[{0} de nutriscore '{1}' de nom {2} et de marque {3}."
+            "\nMagasin {4}, {5}, {6}]\n".format(value[0], value[1], 
                 value[2], value[3], value[4], value[5], value[6])
             )
 
