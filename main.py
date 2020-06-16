@@ -4,8 +4,8 @@
 import os
 import sys
 
-import classe_Database as cd
-import classe_Product as cp
+import Database as D
+import Product as P
 
 
 ################################################################################
@@ -44,7 +44,7 @@ def main():
             print("\nVoici les catégories de produits présents dans le programme"
             " pour le moment.\n")
 
-            database = cd.Database("aliment", "client", "thecode")
+            database = D.Database("aliment", "client", "thecode")
             database.show_category()
             database.disconnect()
 
@@ -55,7 +55,7 @@ def main():
             name = input("\nQuel est son nom ?\n")
             name = name.replace("'", "\\'", 10)
 
-            product = cp.Product(name, brand)
+            product = P.Product(name, brand)
             product.product_to_substitute("product")
             product.substitute_it("product")
             product.save_it()
@@ -64,7 +64,7 @@ def main():
         elif choice == 2:
             
             print("\nVoici tes aliments de substitution rangés par catégorie.")
-            database = cd.Database("aliment", "client", "thecode")
+            database = D.Database("aliment", "client", "thecode")
             database.show_saved_food()
             database.disconnect()
 

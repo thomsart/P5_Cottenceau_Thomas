@@ -4,8 +4,8 @@
 import os
 import sys
 
-import classe_Database as cd
-import classe_Product as cp
+import Database as D
+import Product as P
 
 ################################################################################
 
@@ -23,7 +23,7 @@ def main():
     # 'save_food'. we commit and the disconnect. Obviously you put in the fird-
     # argument your code in your database when you connect as Administrator(root).
 
-    database = cd.Database('', 'root', 'Metalspirit77+')
+    database = D.Database('', 'root', 'Metalspirit77+')
     database.create_the_database()
     database.disconnect()
 
@@ -35,7 +35,7 @@ def main():
     # you want. You put in first argument the food you selected and in the second,
     # the quantity of pages for this food on the API.
 
-    database = cd.Database('aliment', 'client', 'thecode')
+    database = D.Database('aliment', 'client', 'thecode')
     database.fill_tables('cornflakes', 20)
     database.fill_tables('pizza', 20)
     database.fill_tables('camembert', 20)
