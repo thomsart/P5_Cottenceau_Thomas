@@ -11,10 +11,8 @@ import Database as D
 
 ################################################################################
 
-"""
-We create the c class product 
+""" We create the class Product. """
 
-"""
 ################################################################################
 
 class Product(D.Database):

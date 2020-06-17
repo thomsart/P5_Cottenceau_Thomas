@@ -10,11 +10,8 @@ import Product as P
 
 ################################################################################
 
-"""
-This script is the executable of the proramme once you create the database with 
-the 'database_creation.py'.
-
-"""
+""" This script is the executable of the proramme once you create the database 
+with the 'database_creation.py'. """
 
 ################################################################################
 
@@ -26,21 +23,23 @@ def main():
 
     while on:
         
-        # We ask the user to do something by pressing the number of the action he
-        # wants to do.
+        """ We ask the user to do something by pressing the number of the action 
+        he wants to do. """
+
         choice = input("\n1 Remplacer un aliment\n2 Retrouver " 
         "tes aliments sauvegardés\n3 Quitter\n\n")
 
         try:
-            choice = int(choice) # We chieck if it's a number.
+            choice = int(choice)
         except Exception:
             print("\nCe n'est pas un chiffre que tu rentres.")
 
 
         if choice == 1:
             
-            # The programme show him all the differents food which composed the 
-            # database.
+            """ The programme show him all the differents food which composed the 
+            database. """
+
             print("\nVoici les catégories de produits présents dans le programme"
             " pour le moment.\n")
 
@@ -48,8 +47,10 @@ def main():
             database.show_category()
             database.disconnect()
 
-            # We Ask the user to enter the Brand and the name of the product he 
-            # want to substitute.
+            """ We Ask the user to enter the Brand and the name of the product he 
+            want to substitute. And then when the program found it, it propose a 
+            safer one and allow the user to save it if he wants. """
+
             brand = input("\nQuelle est la marque du produit à substituer ?\n")
             brand = brand.replace("'", "\\'", 10)
             name = input("\nQuel est son nom ?\n")
@@ -62,6 +63,9 @@ def main():
             product.disconnect()
 
         elif choice == 2:
+
+            """ Here the program shows to the user the food he saved in the 
+            database. """
             
             print("\nVoici tes aliments de substitution rangés par catégorie.")
             database = D.Database("aliment", "client", "thecode")
@@ -69,6 +73,9 @@ def main():
             database.disconnect()
 
         elif choice == 3:
+
+            """ The user can close the program at any time if he wants by pressing 
+            3 in the menu. """ 
 
             on = False
             print("\nAu revoir !\n")

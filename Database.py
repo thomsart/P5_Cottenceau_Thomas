@@ -12,7 +12,8 @@ import json
 ################################################################################
 
 """
-We create this class   
+We create the class Database for more flexibity. We don't have each time to
+connect and disconnect for exemple.
 
 """
 ################################################################################
@@ -83,9 +84,11 @@ class Database():
         # Now we choose to take here for exemple 20 pages of 'cornflakes' from the Api.
         for i in range(nb_pages):
 
-            # We decide to pick only the pizza and cornflakes for this exemple but-
-            # we can choose any other food actually before checking in the Api-
-            # 'Openfoodfact' of course. 
+            """
+            We choose the food we want to put in the database by the argument 'food'
+            
+            """
+
             url = 'https://fr-en.openfoodfacts.org/category/'+str(food)+'/'+str(i)+'.json'
             response = requests.get(url) # we do the request we need.
             data = response.json() # we convert the type of the document in Json.
