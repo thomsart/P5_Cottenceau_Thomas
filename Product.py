@@ -11,7 +11,7 @@ import Database as D
 
 ################################################################################
 
-""" We create the class Product. """
+""" We create the class Product because it more practic for the entire code to """
 
 ################################################################################
 
@@ -32,6 +32,8 @@ class Product(D.Database):
 
 
     def product_to_substitute(self, table):
+
+        """ This methode . """
 
         self.cursor.execute(
             """select id, name, brand, store, country, quantity, nutriscore, url, 

@@ -11,11 +11,9 @@ import json
 
 ################################################################################
 
-"""
-We create the class Database for more flexibity. We don't have each time to
-connect and disconnect for exemple.
+""" We create the class Database for more flexibity. We don't have each time to
+connect and disconnect for exemple. """
 
-"""
 ################################################################################
 
 class Database():
