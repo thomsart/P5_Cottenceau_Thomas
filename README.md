@@ -40,7 +40,7 @@ ici nous avons des Corn-flakes des Pizzas des Camemberts et enfin des Cornichons
 de requêter autant de fois que vous le souhaitez d'autres aliments. Pensez juste à vérifier le 
 nombre de page (le deuxième argument de la méthode) présent sur l'API pour l'aliment que vous 
 souhaitez importer dans la base.
-Une fois ces considérations prises en compte il ne vous reste plus qu'a éxécuter ce script
+Une fois ces considérations prises en compte il ne vous reste plus qu'à éxécuter ce script
 en tapant la commande 'python database_creation.py' qui vas donc créer la base et la remplir 
 en même temps.
 
