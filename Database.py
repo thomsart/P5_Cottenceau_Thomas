@@ -102,13 +102,12 @@ class Database():
                     nutriscore = product['nutriscore_grade']
                     url = product['url']
                     category = str(food)
-                    product_list = [
-                        name, brand, store, country, quantity, nutriscore, url, category
-                        ]
+                    product_list = [name, brand, store, country, quantity, 
+                    nutriscore, url, category]
                     print(product_list)
 
-                """ We choose to not take product which don't have the headers that 
-                we need. """
+                    """ We choose to not take product which don't have the 
+                    headers that we need. """
 
                 except KeyError:
                     count += 1

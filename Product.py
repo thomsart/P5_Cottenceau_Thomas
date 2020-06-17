@@ -11,7 +11,8 @@ import Database as D
 
 ################################################################################
 
-""" We create the class Product because it more practic for the entire code to """
+""" We create the class Product because it's more practic for the entire code.
+The idea is to create an object with all the attributs of a product. """
 
 ################################################################################
 
@@ -33,19 +34,15 @@ class Product(D.Database):
 
     def product_to_substitute(self, table):
 
-        """ This methode . """
+        """ This methode allow to find the product the user want to substitute."""
 
-        self.cursor.execute(
-            """select id, name, brand, store, country, quantity, nutriscore, url, 
-            category from """+table+""" WHERE name = '"""+self.name+"""' 
-            and brand = '"""+self.brand+"""' """
-            )
+        self.cursor.execute("""select id, name, brand, store, country, quantity, 
+            nutriscore, url, category from """+table+""" WHERE name = 
+            '"""+self.name+"""' and brand = '"""+self.brand+"""' """)
+
         row = self.cursor.fetchall()
-        print(row)
-        
+
         values = row[0]
-        #print(values)
-        
         self.id = values[0]
         self.name = values[1]
         self.brand = values[2]
@@ -62,6 +59,11 @@ class Product(D.Database):
 
 
     def substitute_it(self, table):
+
+        """ Now that we know wich one the user want to substitute we compare it 
+        to others products with better nutriscore. actually the idea was to turn
+        the product to substitute into the one the user will choose as 
+        substitute. """
         
         print("\nEt Voici une liste de ceux qui peuvent le substituer.\n")
         nutriscore_level = ['a', 'b', 'c', 'd']
@@ -74,10 +76,10 @@ class Product(D.Database):
                 else:
                     break
             else:
-                self.cursor.execute(
-                    """select * from """+table+""" WHERE nutriscore = '"""+el+"""' 
-                    and category = '"""+self.category+"""' """
-                    )
+                self.cursor.execute("""select * from """+table+""" WHERE 
+                    nutriscore = '"""+el+"""' and category = '"""+self.category+
+                    """' """)
+
                 row = (self.cursor.fetchall())
                 list_product = []
                 list_id = []
@@ -90,19 +92,18 @@ class Product(D.Database):
                         ,product[4],product[7])
                     else:
                         continue
-        print(list_product)
-        print(list_id)
+
         the_one_user_pick = input("""\nSi tu désire en choisir un pour substituer """
         """ton produit tape son numéro et appuie sur 'Entrer'.\n""")
 
         if the_one_user_pick not in list_id:
             print ("Ce numero ne réfère pas à un produit proposé !")
-        
+
         else:
-            self.cursor.execute(
-                """select id, name, brand, store, country, quantity, nutriscore, url, 
-                category from """+table+""" WHERE id = '"""+the_one_user_pick+"""' """
-                )
+            self.cursor.execute("""select id, name, brand, store, country, 
+                quantity, nutriscore, url, category from """+table+""" WHERE 
+                id = '"""+the_one_user_pick+"""' """)
+
             values = (self.cursor.fetchall()[0])
             self.id = values[0]
             self.name = values[1]
@@ -119,13 +120,13 @@ class Product(D.Database):
 
     def save_it(self):
         
-        self.cursor.execute(
-            """INSERT INTO save_food (name, brand, store, country, quantity, 
-            nutriscore, url, category) VALUES('"""+self.name+"""', 
+        """ thanks to this methode the user can save it to keep it in memory. """
+        
+        self.cursor.execute("""INSERT INTO save_food (name, brand, store, country, 
+            quantity, nutriscore, url, category) VALUES('"""+self.name+"""', 
             '"""+self.brand+"""', '"""+self.store+"""', '"""+self.country+"""', 
             '"""+self.quantity+"""', '"""+self.nutriscore+"""', '"""+self.url+"""', 
-            '"""+self.category+"""')"""
-            )
+            '"""+self.category+"""') """)
 
         return print("\nLe produit vient d'être ajouté à tes sauvegardes.\n")
 
