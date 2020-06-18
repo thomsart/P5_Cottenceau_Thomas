@@ -61,11 +61,16 @@ def main():
 
             if product.id == 0:
                 continue
-               
+
             else:
                 product.substitute_it("product")
-                product.save_it()
-                product.disconnect()
+
+                if product.sub == []:
+                    continue
+
+                else:    
+                    product.save_it()
+                    product.disconnect()
 
         elif choice == 2:
 

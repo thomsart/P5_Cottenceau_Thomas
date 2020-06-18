@@ -30,7 +30,7 @@ class Product(D.Database):
         self.nutriscore = ""
         self.url = ""
         self.category = ""
-
+        self.sub = []
 
     def product_to_substitute(self, table):
 
@@ -52,10 +52,10 @@ class Product(D.Database):
             self.nutriscore = values[6]
             self.url = values[7]
             self.category = values[8]
-            print("\nVoici le produit que tu cherches à substituer !\n{}\n".format(values))
+            print("\nVoici le produit que tu cherches à substituer.\n{}\n".format(values))
 
         except IndexError:
-            print("\nVisiblement ce produit n'existe pas, ou est mal hortographié.")
+            print("\nVisiblement ce produit n'existe pas, ou est mal orthographié.")
 
         return
 
@@ -69,10 +69,11 @@ class Product(D.Database):
         
         print("\nVoici une liste de ceux qui peuvent le substituer.\n")
         nutriscore_level = ['a', 'b', 'c', 'd']
+        list_product = []
         for el in nutriscore_level:
             if el == self.nutriscore:
                 if self.nutriscore == 'a':
-                    print("\nCe produit a un nutriscore de A, ce n'est pas "
+                    print("\nCe produit a un nutriscore 'A', ce n'est pas "
                     "néccessaire de le substituer.\n")
                     break
                 else:
@@ -83,23 +84,24 @@ class Product(D.Database):
                     """' """)
 
                 row = (self.cursor.fetchall())
-                list_product = []
-                list_id = []
+                
                 for product in row:
                     if product[7] not in list_product :
                         list_product.append(product[7])
-                        list_id.append(str(product[0]))
+                        self.sub.append(str(product[0]))
                         print("Numero: "+str(product[0])+" de nutriscore: "
                         +str(product[6])+"\n",product[1],product[2],product[3]
                         ,product[4],product[7])
                     else:
                         continue
-
+        print(self.sub)
         the_one_user_pick = input("""\nSi tu désire en choisir un pour substituer """
         """ton produit tape son numéro et appuie sur 'Entrer'.\n""")
 
-        if the_one_user_pick not in list_id:
+        if the_one_user_pick not in self.sub:
             print ("Ce numero ne réfère pas à un produit proposé !")
+            self.sub = []
+            pass
 
         else:
             self.cursor.execute("""select id, name, brand, store, country, 
@@ -117,7 +119,9 @@ class Product(D.Database):
             self.url = values[7]
             self.category = values[8]
 
-        return print("\nVoici le produit de substitution.\n\n{}\n".format(values))
+            print("\nVoici le produit que tu as choisis.\n\n{}\n".format(values))
+
+        return 
 
 
     def save_it(self):
