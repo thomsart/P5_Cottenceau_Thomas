@@ -55,9 +55,9 @@ class Product(D.Database):
             print("\nVoici le produit que tu cherches à substituer !\n{}\n".format(values))
 
         except IndexError:
-            print("\nVisiblement ce produit n'existe pas.\nIl est aussi peut être mal hortographié.")
+            print("\nVisiblement ce produit n'existe pas, ou est mal hortographié.")
 
-        return 
+        return
 
 
     def substitute_it(self, table):

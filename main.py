@@ -37,7 +37,7 @@ def main():
 
         if choice == 1:
             
-            """ The programme show him all the differents food which composed the 
+            """ The programme show him all the differents foods that composed the 
             database. """
 
             print("\nVoici les catégories de produits présents dans le programme"
@@ -58,9 +58,14 @@ def main():
 
             product = P.Product(name, brand)
             product.product_to_substitute("product")
-            product.substitute_it("product")
-            product.save_it()
-            product.disconnect()
+
+            if product.id == 0:
+                continue
+               
+            else:
+                product.substitute_it("product")
+                product.save_it()
+                product.disconnect()
 
         elif choice == 2:
 
