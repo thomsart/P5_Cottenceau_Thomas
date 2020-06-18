@@ -41,19 +41,21 @@ class Product(D.Database):
             '"""+self.name+"""' and brand = '"""+self.brand+"""' """)
 
         row = self.cursor.fetchall()
+        try:
+            values = row[0]
+            self.id = values[0]
+            self.name = values[1]
+            self.brand = values[2]
+            self.store = values[3]
+            self.country = values[4]
+            self.quantity = values[5]
+            self.nutriscore = values[6]
+            self.url = values[7]
+            self.category = values[8]
+            print("\nVoici le produit que tu cherches à substituer !\n{}\n".format(values))
 
-        values = row[0]
-        self.id = values[0]
-        self.name = values[1]
-        self.brand = values[2]
-        self.store = values[3]
-        self.country = values[4]
-        self.quantity = values[5]
-        self.nutriscore = values[6]
-        self.url = values[7]
-        self.category = values[8]
-
-        print("\nVoici le produit que tu cherches à substituer !\n{}\n".format(values))
+        except IndexError:
+            print("\nVisiblement ce produit n'existe pas.\nIl est aussi peut être mal hortographié.")
 
         return 
 
@@ -65,7 +67,7 @@ class Product(D.Database):
         the product to substitute into the one the user will choose as 
         substitute. """
         
-        print("\nEt Voici une liste de ceux qui peuvent le substituer.\n")
+        print("\nVoici une liste de ceux qui peuvent le substituer.\n")
         nutriscore_level = ['a', 'b', 'c', 'd']
         for el in nutriscore_level:
             if el == self.nutriscore:
