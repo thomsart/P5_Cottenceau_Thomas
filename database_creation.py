@@ -24,7 +24,7 @@ def main():
     argument the code you use to connect to your database when you connect as 
     Administrator(root). """
 
-    database = D.Database('', 'root', 'Metalspirit77+')
+    database = D.Database('', 'root', '########')
     database.create_the_database()
     database.disconnect()
 
