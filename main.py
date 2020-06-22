@@ -33,40 +33,20 @@ def main():
 
         if choice == 1:
 
-            """ The programme show him all the differents foods that composed the
-            database. """
-
-            print("\nVoici les catégories de produits présents dans le "
-                  "programme pour le moment.\n")
-
-            database = D.Database("aliment", "client", "thecode")
-            database.show_category()
-            database.disconnect()
-
             """ We Ask the user to enter the Brand and the name of the product
             he want to substitute. And then when the program found it, it
             propose a safer one and allow the user to save it if he wants. """
 
-            brand = input("\nQuelle est la marque du produit à substituer ?\n")
-            brand = brand.replace("'", "\\'", 10)
-            name = input("\nQuel est son nom ?\n")
-            name = name.replace("'", "\\'", 10)
-
-            product = P.Product(name, brand)
+            product = P.Product()
+            product.select_brand()
+            product.select_name()
             product.product_to_substitute("product")
-
-            if product.id == 0:
-                continue
-
+            product.substitute_it("product")
+            if product.sub == []:
+                product.disconnect()
             else:
-                product.substitute_it("product")
-
-                if product.sub == []:
-                    continue
-
-                else:
-                    product.save_it()
-                    product.disconnect()
+                product.save_it()
+                product.disconnect()
 
         elif choice == 2:
 

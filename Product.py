@@ -13,12 +13,12 @@ The idea is to create an object with all the attributs of a product. """
 
 class Product(D.Database):
 
-    def __init__(self, nom, marque):
+    def __init__(self):
         D.Database.__init__(self, "aliment", "client", "thecode")
 
         self.id = 0
-        self.name = nom
-        self.brand = marque
+        self.name = ""
+        self.brand = ""
         self.store = ""
         self.country = ""
         self.quantity = ""
@@ -26,6 +26,57 @@ class Product(D.Database):
         self.url = ""
         self.category = ""
         self.sub = []
+
+    def select_brand(self):
+
+        """ This methode show all the differents brands of products we
+        have in the databases. """
+
+        print("Voici les marques de produits présents dans la base."
+              "\nSelectionne celle dont tu recherche le produit en"
+              " tapant son numéro.")
+        list_brands = []
+        self.cursor.execute("""SELECT brand FROM product""")
+        result = self.cursor.fetchall()
+        for elements in result:
+            for brand in elements:
+                if brand in list_brands:
+                    continue
+                else:
+                    list_brands.append(brand)
+        list_brand_sorted = []
+        list_brand_sorted = sorted(list_brands)
+        for number, brand in enumerate(list_brand_sorted):
+            print("n°"+str(number)+": "+brand)
+        self.brand = list_brand_sorted[int(input())]
+        print(self.brand)
+
+        return
+
+    def select_name(self):
+
+        """ This methode show all the differents names of products we
+        have in the databases. """
+
+        print("Voici les noms de produits référents à cette marque.")
+        list_names = []
+        self.cursor.execute("""SELECT name FROM product
+                            WHERE brand = '"""+self.brand+"""' """)
+        result = self.cursor.fetchall()
+        for elements in result:
+            for name in elements:
+                if name in list_names:
+                    continue
+                else:
+                    list_names.append(name)
+        list_names_sorted = []
+        list_names_sorted = sorted(list_names)
+        for number, name in enumerate(list_names_sorted):
+            print("n°" + str(number) + ": " + name)
+        self.name = list_names_sorted[int(input())]
+        print(self.name)
+
+        return
 
     def product_to_substitute(self, table):
 
@@ -65,7 +116,7 @@ class Product(D.Database):
         turn the product to substitute into the one the user will choose as
         substitute. """
 
-        print("\nVoici une liste de ceux qui peuvent le substituer.\n")
+        print("\nCes produits peuvent le substituer.\n")
         nutriscore_level = ['a', 'b', 'c', 'd']
         list_product = []
         for el in nutriscore_level:
@@ -92,10 +143,10 @@ class Product(D.Database):
                               product[3], product[4], product[7])
                     else:
                         continue
-        print(self.sub)
+
         the_one_user_pick = input("""\nSi tu désire en choisir un pour"""
-                                  """ubstituer ton produit tape son"""
-                                  """numéro et appuie sur 'Entrer'.\n""")
+                                  """ substituer ton produit tape son"""
+                                  """ numéro et appuie sur 'Entrer'.\n""")
 
         if the_one_user_pick not in self.sub:
             print("Ce numero ne réfère pas à un produit proposé !")
@@ -119,7 +170,7 @@ class Product(D.Database):
             self.url = values[7]
             self.category = values[8]
 
-            print("\nVoici le produit que tu as choisis.\n\n{}\n"
+            print("\nTu as choisis ce produit.\n\n{}\n"
                   .format(values))
 
         return

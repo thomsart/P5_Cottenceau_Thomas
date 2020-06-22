@@ -131,20 +131,6 @@ class Database():
 
         return
 
-    def show_category(self):
-
-        """ This methode show all the differents categorys of the products we
-        have in the databases. """
-
-        self.cursor.execute("""SELECT name FROM category""")
-
-        element = self.cursor.fetchall()
-        for el in element:
-            for cat in el:
-                print(cat)
-
-        return
-
     def show_saved_food(self):
 
         """ This methode show all the substitutes saved by the client. """
